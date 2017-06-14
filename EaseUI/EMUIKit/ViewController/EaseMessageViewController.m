@@ -349,6 +349,8 @@
         self.chatBarMoreView = (EaseChatBarMoreView*)[(EaseChatToolbar *)self.chatToolbar moreView];
         self.faceView = (EaseFaceView*)[(EaseChatToolbar *)self.chatToolbar faceView];
         self.recordView = (EaseRecordView*)[(EaseChatToolbar *)self.chatToolbar recordView];
+    } else {
+        self.faceView = (EaseFaceView*)[(EaseChatToolbar *)self.chatToolbar faceView];
     }
 }
 

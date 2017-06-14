@@ -87,6 +87,7 @@
             break;
         case EMMessageBodyTypeImage:
         {
+            /*
             CGSize retSize = self.model.thumbnailImageSize;
             if (retSize.width == 0 || retSize.height == 0) {
                 retSize.width = kEMMessageImageSizeWidth;
@@ -108,6 +109,7 @@
             self.bubbleWithImageConstraint = [NSLayoutConstraint constraintWithItem:self.bubbleView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:retSize.width + margin];
             
             [self addConstraint:self.bubbleWithImageConstraint];
+             */
         }
             break;
         case EMMessageBodyTypeLocation:
