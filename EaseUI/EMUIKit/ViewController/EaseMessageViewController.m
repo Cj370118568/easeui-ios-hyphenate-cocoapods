@@ -926,8 +926,11 @@
                     strongSelf.messageTimeIntervalTag = latest.timestamp;
                     
                     [strongSelf.tableView reloadData];
-                    
-                    [strongSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.dataArray count] - scrollToIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//                    [strongSelf _scrollViewToBottom:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self _scrollViewToBottom:NO];
+                    });
+//                    [strongSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.dataArray count] - scrollToIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
                 }
             });
             
@@ -1053,8 +1056,8 @@
                 if (_dataSource && [_dataSource respondsToSelector:@selector(emotionURLFormessageViewController:messageModel:)]) {
                     EaseEmotion *emotion = [_dataSource emotionURLFormessageViewController:self messageModel:model];
                     if (emotion) {
-                        model.image = [UIImage sd_animatedGIFNamed:emotion.emotionOriginal];
-                        model.fileURLPath = emotion.emotionOriginalURL;
+//                        model.image = [UIImage sd_animatedGIFNamed:emotion.emotionOriginal];
+//                        model.fileURLPath = emotion.emotionOriginalURL;
                     }
                 }
                 sendCell.model = model;
@@ -1758,7 +1761,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.dataArray addObjectsFromArray:messages];
             [weakSelf.tableView reloadData];
-            [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[weakSelf.dataArray count] - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+//             [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[weakSelf.dataArray count] - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf _scrollViewToBottom:YES];
+            });
+            
         });
     });
 }
@@ -1807,7 +1816,11 @@
                 [self.dataArray removeAllObjects];
                 [self.dataArray addObjectsFromArray:formattedMessages];
                 [self.tableView reloadData];
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.dataArray count] - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self _scrollViewToBottom:YES];
+                });
+//                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.dataArray count] - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//
                 return;
             }
         }

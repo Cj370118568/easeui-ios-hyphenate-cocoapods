@@ -471,6 +471,9 @@ shouldSendHasReadAckForMessage:(EMMessage *)message
  */
 - (void)sendVideoMessageWithURL:(NSURL *)url;
 
+
+
+
 /*!
  @method
  @brief 添加消息
@@ -506,4 +509,5 @@ shouldSendHasReadAckForMessage:(EMMessage *)message
 - (BOOL)shouldSendHasReadAckForMessage:(EMMessage *)message
                                  read:(BOOL)read;
 
+- (void)_scrollViewToBottom:(BOOL)animated;
 @end
